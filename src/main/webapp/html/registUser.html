@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>registUser</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        function UserForm() {
+            return ( <form>
+                        <label>
+                            用户名:
+                            <input type="text" value={this.state.userName} onChange={this.handleChange}/>
+                        </label>
+                        <label>
+                            邮箱:
+                            <input type="text" value={this.state.email} onChange={this.handleChange}/>
+                        </label>
+                        <label>
+                            密码:
+                            <input type="text" value={this.state.password} onChange={this.handleChange}/>
+                        </label>
+                        <label>
+                            密码确认:
+                            <input type="text" onChange={this.handleChange}/>
+                        </label>
+                        <input type="submit" value="Submit"/>
+                    </form>
+            )
+
+        }
+
+
+        ReactDOM.render(
+                <UserForm/>,
+            document.getElementById('example')
+        );
+    </script>
+</head>
+<body>
+<div id="userRegistForm">
+
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leqienglish.dao.ContentDao">
+    <!--设置domain类和数据库中表的字段一一对应，注意数据库字段和domain类中的字段名称不致，此处一定要！-->
+    <resultMap id="BaseResultMap" type="com.leqienglish.model.Content">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="title" property="title" jdbcType="CHAR" />
+        <result column="content" property="content" jdbcType="CHAR" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="imagePath" property="imagePath" jdbcType="CHAR" />
+        <result column="filePath" property="filePath" jdbcType="CHAR" />
+        <result column="type" property="type" jdbcType="CHAR" />
+        <result column="createDate" property="createDate" jdbcType="INTEGER" />
+        <result column="updateDate" property="updateDate" jdbcType="INTEGER" />
+    </resultMap>
+    <!-- 查询单条记录 -->
+    <select id="findContentById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT * FROM content  WHERE id = #{id}
+    </select>
+
+    <select id="findAllContentByType"  parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT * FROM CONTENT WHERE type=#{type} AND statue=1 LIMIT #{startIndex},#{size}
+    </select>
+
+</mapper>
