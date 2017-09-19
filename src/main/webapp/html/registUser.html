@@ -13,19 +13,19 @@
             return ( <form>
                         <label>
                             用户名:
-                            <input type="text" value={this.state.userName} onChange={this.handleChange}/>
+                            <input type="text" />
                         </label>
                         <label>
                             邮箱:
-                            <input type="text" value={this.state.email} onChange={this.handleChange}/>
+                            <input type="text" />
                         </label>
                         <label>
                             密码:
-                            <input type="text" value={this.state.password} onChange={this.handleChange}/>
+                            <input type="text" />
                         </label>
                         <label>
                             密码确认:
-                            <input type="text" onChange={this.handleChange}/>
+                            <input type="text" />
                         </label>
                         <input type="submit" value="Submit"/>
                     </form>
@@ -36,7 +36,7 @@
 
         ReactDOM.render(
                 <UserForm/>,
-            document.getElementById('example')
+            document.getElementById('userRegistForm')
         );
     </script>
 </head>
