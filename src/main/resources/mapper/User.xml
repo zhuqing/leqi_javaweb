@@ -18,6 +18,9 @@
     <select id="findUserByEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
         SELECT * from USER  where Email = #{email}
     </select>
+    <select id="findUserByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT * from USER  where name = #{name}
+    </select>
     <select id="get" resultMap="BaseResultMap">
       SELECT * FROM user
     </select>

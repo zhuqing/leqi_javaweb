@@ -48,6 +48,7 @@ public interface UserDao {
     public Long getCount();
 
     public User findUserByEmail(String email);
+    public User findUserByName(String name);
 
 
 

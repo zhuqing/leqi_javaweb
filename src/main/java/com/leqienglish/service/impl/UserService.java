@@ -57,5 +57,9 @@ public class UserService implements UserServiceI {
         return null;
     }
 
+    public User findUserByName(String userName) {
+        return this.userDao.findUserByName(userName);
+    }
+
 
 }

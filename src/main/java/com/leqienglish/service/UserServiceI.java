@@ -8,6 +8,9 @@ import java.util.List;
  * Created by zhuqing on 2017/7/21.
  */
 public interface UserServiceI {
+
+
+
     User findUser(Long id);
     /**
      * 新增用户
@@ -47,4 +50,6 @@ public interface UserServiceI {
     public Long getCount();
 
     public User findUser(String value);
+
+    public User findUserByName(String userName);
 }

@@ -5,44 +5,73 @@
     <title>registUser</title>
     <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
     <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="/js/jquery-3.2.1.js"></script>
     <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+<script>
+    function userNameChange(){
+      var userName = $("#userName").val()
+      $.ajax(
+          {
+              url:"/hasUser?userName="+userName,
+              success:function (e) {
+                  alert(a.msg)
+              }
+          }
+      )
+    }
+</script>
 
-    <script type="text/babel">
-
-        function UserForm() {
-            return ( <form>
-                        <label>
-                            用户名:
-                            <input type="text" />
-                        </label>
-                        <label>
-                            邮箱:
-                            <input type="text" />
-                        </label>
-                        <label>
-                            密码:
-                            <input type="text" />
-                        </label>
-                        <label>
-                            密码确认:
-                            <input type="text" />
-                        </label>
-                        <input type="submit" value="Submit"/>
-                    </form>
-            )
-
-        }
-
-
-        ReactDOM.render(
-                <UserForm/>,
-            document.getElementById('userRegistForm')
-        );
-    </script>
 </head>
 <body>
 <div id="userRegistForm">
+    <form>
+        <table>
+            <tr>
+                <td>
+                    <label>
+                        用户名:
+                    </label>
+                </td>
+                <td>
+                    <input type="text" name="userName"  onfocus="userNameChange()" onblur="userNameChange()" id="userName"/>
+                </td>
+            </tr>
 
+            <tr>
+                <td>
+                    <label>
+                        邮箱:
+
+                    </label>
+                </td>
+                <td>   <input type="text" name="email" id="email"/></td>
+            </tr>
+            <tr>
+                <td>
+
+                    <label>
+                        密码:
+
+                    </label>
+                </td>
+                <td> <input type="password" name="password" id="password"/></td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        密码确认:
+
+                    </label>
+                </td>
+                <td>  <input type="password" name="repassword" id="repassword"/></td>
+            </tr>
+            <tr>
+                <td colSpan="2">
+                    <input type="submit" value="Submit"/>
+                </td>
+            </tr>
+        </table>
+    </form>
 </div>
 </body>
 </html>

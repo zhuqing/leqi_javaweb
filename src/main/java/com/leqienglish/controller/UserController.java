@@ -2,6 +2,7 @@ package com.leqienglish.controller;
 
 
 
+import com.leqienglish.model.Message;
 import com.leqienglish.service.UserServiceI;
 import com.leqigame.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,9 +45,23 @@ public class UserController {
     public @ResponseBody List<User> get(){
         return userServiceI.get();
     }
+
     @RequestMapping(value = "get/{page}/{pageSize}")
     public @ResponseBody List<User> get(@PathVariable  Integer page,@PathVariable Integer pageSize){
         return userServiceI.get(page,pageSize);
+    }
+
+    @RequestMapping(value = "hasUser")
+    public Message hasUser(@RequestParam(name="userName") String userName){
+        User user = this.userServiceI.findUserByName(userName);
+        Message message = new Message();
+        if(user == null){
+             message.setMsg("ok");
+        }else{
+            message.setMsg("error");
+        }
+
+        return message;
     }
 
     @RequestMapping("count")
