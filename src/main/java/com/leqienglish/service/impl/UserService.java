@@ -61,5 +61,9 @@ public class UserService implements UserServiceI {
         return this.userDao.findUserByName(userName);
     }
 
+    public User findUserByEmail(String email) {
+        return this.userDao.findUserByEmail(email);
+    }
+
 
 }

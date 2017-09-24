@@ -1,9 +1,9 @@
 package com.leqienglish.service.impl;
 
 import com.leqienglish.dao.ContentDao;
-import com.leqienglish.model.Content;
 import com.leqienglish.model.Page;
 import com.leqienglish.service.ContentServiceI;
+import com.leqigame.entity.Content;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +22,25 @@ public class ContentService implements ContentServiceI {
         return contentDao.findContentById(id);
     }
 
+    @Override
+    public List<Content> findContentByUser(Long userId) {
+        return contentDao.findContentByUserId(userId);
+    }
+
+    @Override
+    public Long saveContent(Content content) {
+        return this.contentDao.saveContent(content);
+    }
+
     public List<Content> findContentByType(Integer type, Page page) {
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("type",type);
         map.put("startIndex",page.getStartIndex());
         map.put("size",page.getPageSize());
+        return null;
+    }
+
+    public List<Content> getContentByUserId(Long userId) {
         return null;
     }
 }

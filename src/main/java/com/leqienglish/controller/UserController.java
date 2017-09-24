@@ -2,14 +2,16 @@ package com.leqienglish.controller;
 
 
 
-import com.leqienglish.model.Message;
 import com.leqienglish.service.UserServiceI;
+import com.leqienglish.util.MessageUtil;
+import com.leqigame.entity.Message;
 import com.leqigame.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -23,8 +25,11 @@ public class UserController {
     private UserServiceI userServiceI;
 
     @RequestMapping(value="/addUser",method=RequestMethod.POST)
-    public  @ResponseBody User addUser(@RequestBody User user){
-
+    public  @ResponseBody User addUser(@RequestParam("name") String name,@RequestParam("email") String email,@RequestParam("password") String password){
+        User user = new User();
+        user.setEmail(email);
+        user.setName(name);
+        user.setPassword(password);
         user.setUpdateDate(System.currentTimeMillis());
         user.setCreateDate(System.currentTimeMillis());
         userServiceI.addUser(user);
@@ -52,7 +57,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "hasUser")
-    public Message hasUser(@RequestParam(name="userName") String userName){
+    public @ResponseBody Message hasUser(@RequestParam("userName") String userName){
         User user = this.userServiceI.findUserByName(userName);
         Message message = new Message();
         if(user == null){
@@ -72,5 +77,26 @@ public class UserController {
     @RequestMapping("findUser/{value}")
     public @ResponseBody User findUser(@PathVariable String value){
         return userServiceI.findUser(value);
+    }
+    @RequestMapping("login")
+    public @ResponseBody Message<User> login(@RequestParam("value") String value,@RequestParam("password") String password){
+
+        User user = null;
+        if(value.contains("@")){
+            user = this.userServiceI.findUserByEmail(value);
+        }else{
+            user = this.userServiceI.findUserByName(value);
+        }
+
+        if(user == null){
+            return MessageUtil.createMessage("0","没找到用户",user);
+        }
+
+        if(Objects.equals(password,user.getPassword())){
+
+            return MessageUtil.createMessage("1","登录成功",user);
+        }
+
+        return MessageUtil.createMessage("0","登录失败",new User());
     }
 }

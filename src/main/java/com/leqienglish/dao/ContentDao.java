@@ -1,7 +1,6 @@
 package com.leqienglish.dao;
 
-import com.leqienglish.model.Content;
-import com.leqienglish.model.Page;
+import com.leqigame.entity.Content;
 
 import java.util.List;
 import java.util.Map;
@@ -10,6 +9,10 @@ import java.util.Map;
  * Created by zhuqing on 2017/8/24.
  */
 public interface ContentDao {
+
+    public List<Content> findContentByUserId(Long userId);
+
+    public Long saveContent(Content content);
     /**
      *根据ID查找Content
      * @param id

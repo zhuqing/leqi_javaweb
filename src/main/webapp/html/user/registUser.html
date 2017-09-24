@@ -12,13 +12,30 @@
       var userName = $("#userName").val()
       $.ajax(
           {
-              url:"/hasUser?userName="+userName,
+              url:"/user/hasUser?userName="+userName,
               success:function (e) {
-                  alert(a.msg)
+                  $("#userInfo").html(e.msg)
               }
           }
       )
     }
+
+    function registUser(){
+        var userName =  $("#userName").val()
+        var password = $("#password").val()
+        var email = $("#email").val()
+
+        $.ajax({
+            url:"/user/addUser?name="+userName+"&email="+email+"&password="+password,
+            type:"POST",
+            contentType: "application/json; charset=utf-8",
+            success:function(msg){
+                alert("保存成功");
+            }
+        })
+    }
+
+
 </script>
 
 </head>
@@ -34,6 +51,7 @@
                 </td>
                 <td>
                     <input type="text" name="userName"  onfocus="userNameChange()" onblur="userNameChange()" id="userName"/>
+                    <label id="userInfo"></label>
                 </td>
             </tr>
 
@@ -67,7 +85,7 @@
             </tr>
             <tr>
                 <td colSpan="2">
-                    <input type="submit" value="Submit"/>
+                    <input type="button" value="注册" onclick="registUser()"/>
                 </td>
             </tr>
         </table>
