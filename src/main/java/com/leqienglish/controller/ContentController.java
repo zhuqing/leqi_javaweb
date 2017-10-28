@@ -2,6 +2,7 @@ package com.leqienglish.controller;
 
 import com.leqienglish.model.Page;
 import com.leqienglish.service.ContentServiceI;
+import com.leqienglish.util.EntityUtil;
 import com.leqienglish.util.MessageUtil;
 import com.leqigame.entity.Content;
 import com.leqigame.entity.Message;
@@ -23,13 +24,23 @@ public class ContentController {
 
     @Autowired
     private ContentServiceI contentServiceI;
+
     @RequestMapping(value="/saveContent",method= RequestMethod.POST)
     public @ResponseBody Message saveContent( @RequestBody Content artical){
-             artical.setCreateDate(System.currentTimeMillis());
-             artical.setUpdateDate(System.currentTimeMillis());
+        EntityUtil.setDate(artical);
              Long contentId = this.contentServiceI.saveContent(artical);
              return  MessageUtil.createMessage("1","ok",contentId);
     }
+
+
+
+    @RequestMapping(value="/getContents/{page}/{pageSize}",method= RequestMethod.GET)
+    public @ResponseBody Message getContents(@PathVariable Integer page,@PathVariable Integer pageSize){
+
+        List<Content> contents = this.contentServiceI.getContents(new Page(page,pageSize));
+        return MessageUtil.createSuccessMessage(contents);
+    }
+
     @RequestMapping(value="/getContentByUserId",method= RequestMethod.GET)
     public @ResponseBody Message getContentByUserId(@RequestParam("userId") Long userId){
         List<Content> contents = this.contentServiceI.findContentByUser(userId);
@@ -38,8 +49,8 @@ public class ContentController {
     }
 
     @RequestMapping(value="/getContentById/{id}",method= RequestMethod.GET)
-    public Content getContentById(Long id){
-        return contentServiceI.findContentById(id);
+    public @ResponseBody Message getContentById( @PathVariable Long id){
+        return MessageUtil.createSuccessMessage(contentServiceI.findContentById(id));
     }
 
     @RequestMapping(value = "/getContentByType/{type}/{page}/{pageSize}",method = RequestMethod.GET)
@@ -50,12 +61,23 @@ public class ContentController {
 
         return contentServiceI.findContentByType(type,p);
     }
+    @RequestMapping(value = "/getContentByUserIdAndCatalogId/{userId}/{catalogId}",method = RequestMethod.GET)
+    public @ResponseBody Message getContentByUserIdAndCatalogId( @PathVariable Long userId,@PathVariable Long catalogId){
+        List<Content> contents = this.contentServiceI.findContentByUserIdCatalogId(userId,catalogId);
+        return MessageUtil.createSuccessMessage(contents);
+    }
 
-    @RequestMapping(value = "/upload/{id}",method = RequestMethod.POST)
-    public Message upload(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request, @PathVariable Long id) {
+    @RequestMapping(value = "/getOnlyContentById/{id}",method = RequestMethod.GET)
+    public @ResponseBody Message getOnlyContentById(@PathVariable Long id){
+        return MessageUtil.createSuccessMessage("");
+    }
 
-        System.out.println("开始:"+id);
-        String path = "d:/";
+    @RequestMapping(value = "/upload",method = RequestMethod.POST)
+    public Message upload(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request) {
+
+        System.out.println("开始:");
+        String path = System.getProperty("USER_HOME");
+         path = path+"/";
         String fileName = file.getOriginalFilename();
         System.out.println(path);
         File targetFile = new File(path, fileName);

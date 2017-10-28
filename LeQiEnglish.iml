@@ -29,7 +29,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="1.8 (1)" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: jstl:jstl:1.2" level="project" />
     <orderEntry type="library" name="Maven: javax:javaee-api:7.0" level="project" />
@@ -72,7 +72,7 @@
     <orderEntry type="module-library">
       <library name="Maven: LeQi_Entity:LeQi:1.0.3-SNAPSHOT">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/LeQi_Entity-1.0.3-SNAPSHOT.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/LeQi_Entity-1.0.4-SNAPSHOT.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

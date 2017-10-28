@@ -17,9 +17,52 @@ body, html {
 	height: 100%;
 }
 
+ .editorright {
+	width: 70%;
+	display: inline;
+	float: left;
+	height: 100%;
+	 background: #EEE;
+	 margin: 0; padding: 0;
+}
+
+.editorleft{
+	width: 30%;
+	display: inline;
+	float: left;
+	height: 100%;
+}
+
+.userCatalogList{
+	width: 50%;
+	display: inline;
+	float: left;
+	height: 100%;
+}
+
+
+
 .left {
 	background: #EEE;
 	margin: 0; padding: 0;
+}
+
+.editorright textarea {
+	margin: 10px;
+	background: none; border: none;
+	outline: none;
+	width: 98%; height: 90%;
+	font-size: 1.1em;
+}
+
+.editorright #post-title {
+	font-size: 1.3em;
+	padding: 8px; margin: 5px;
+	padding-left: 5px;
+	border: none;
+	width: 95%;
+	outline: none;
+	background: none; font-weight: bold;
 }
 
 .left textarea {
@@ -69,6 +112,26 @@ button.icon.action {
 	border: none;
 	font-size: 1.5em;
 	outline: none; cursor: pointer;
+}
+
+.editor_toolbox {
+	position: absolute;
+	bottom: 10px; left: 10px;
+	width: 100%; height: 30px;
+	text-align: left;
+	float: right;
+}
+
+.editor_toolbox button {
+	background: #e67e22;
+	width: 30px; height: 30px;
+	font-size: 1.0em;
+	outline: none; cursor: pointer;
+	color: #FFF;
+
+	border: none;
+	border-radius: 30px;
+	margin-right: 5px;
 }
 
 .toolbox {

@@ -3,6 +3,7 @@ package com.leqienglish.service.impl;
 import com.leqienglish.dao.ContentDao;
 import com.leqienglish.model.Page;
 import com.leqienglish.service.ContentServiceI;
+import com.leqienglish.util.EntityUtil;
 import com.leqigame.entity.Content;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,19 @@ import java.util.Map;
 public class ContentService implements ContentServiceI {
     @Autowired
     private ContentDao contentDao;
+
+    public List<Content> findContentByUserIdCatalogId(Long userId, Long catalogId) {
+        Map<String,Long> map = new HashMap();
+        map.put("userId",userId);
+        map.put("catalogId",catalogId);
+        return contentDao.findContentByUserIdCatalogId(map);
+    }
+
+    @Override
+    public List<Content> getContents(Page page) {
+        return this.contentDao.getContents(page);
+    }
+
     public Content findContentById(Long id) {
         return contentDao.findContentById(id);
     }
@@ -30,6 +44,11 @@ public class ContentService implements ContentServiceI {
     @Override
     public Long saveContent(Content content) {
         return this.contentDao.saveContent(content);
+    }
+
+    public Long updateContent(Content content) {
+        EntityUtil.reSetUpdateDate(content);
+        return this.contentDao.updateContent(content);
     }
 
     public List<Content> findContentByType(Integer type, Page page) {

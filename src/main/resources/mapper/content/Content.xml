@@ -18,13 +18,22 @@
         <result column="sharedCount" property="sharedCount" jdbcType="INTEGER" />
         <result column="createDate" property="createDate" jdbcType="INTEGER" />
         <result column="updateDate" property="updateDate" jdbcType="INTEGER" />
+        <result column="catalogId" property="catalogId" jdbcType="INTEGER" />
     </resultMap>
     <sql id="BASE_ALL_COLUMNS">
-        ID,TITLE,content,status,imageUrl,fileUrl,type,contentType,userId,awesomeCount,commentCount,sharedCount,createDate,updateDate
+        ID,TITLE,content,status,imageUrl,fileUrl,type,contentType,userId,awesomeCount,commentCount,sharedCount,createDate,updateDate,catalogId
+    </sql>
+
+    <sql id="BASE_ID_TITLE">
+        ID,TITLE,content
+    </sql>
+
+    <sql id="BASE_ID_CONTENT">
+        ID,content
     </sql>
 
     <sql id="BASE_ALL_COLUMNS_NO_CONTENT">
-        ID,TITLE,status,imageUrl,fileUrl,type,contentType,userId,awesomeCount,commentCount,sharedCount,createDate,updateDate
+        ID,TITLE,status,imageUrl,fileUrl,type,contentType,userId,awesomeCount,commentCount,sharedCount,createDate,updateDate,catalogId
     </sql>
 
     <sql id="ONLY_CONTENT">
@@ -32,24 +41,37 @@
     </sql>
 
     <insert  id="saveContent" useGeneratedKeys="true" keyProperty="id"  parameterType="com.leqigame.entity.Content">
-           INSERT INTO  CONTENT(TITLE,CONTENT,USERID,CREATEDATE,UPDATEDATE) VALUES (#{title},#{content},#{userId},#{createDate},#{updateDate})
+           INSERT INTO  CONTENT(TITLE,CONTENT,USERID,CREATEDATE,UPDATEDATE,CatalogId) VALUES (#{title},#{content},#{userId},#{createDate},#{updateDate},#{catalogId})
     </insert>
+
+    <update  id="saveContent" useGeneratedKeys="true" keyProperty="id"  parameterType="com.leqigame.entity.Content">
+        UPDATE CONTENT  set TITLE = #{title},CONTENT=#{content},UPDATEDATE=#{updateDate} where ID = #{id}
+    </update>
     <!-- 查询单条记录 -->
     <select id="findContentById" parameterType="java.lang.Long" resultMap="BaseResultMap">
         SELECT
-        <include refid="BASE_ALL_COLUMNS"/>>
+        <include refid="BASE_ALL_COLUMNS"/>
         FROM content  WHERE id = #{id}
     </select>
 
-    <select id="findAllContentByType"  parameterType="java.util.Map" resultMap="BaseResultMap">
+      <select id="findAllContentByType"  parameterType="java.util.Map" resultMap="BaseResultMap">
         SELECT * FROM CONTENT WHERE type=#{type} AND statue=1 LIMIT #{startIndex},#{size}
     </select>
 
+    <select id="getContents"  parameterType="com.leqienglish.model.Page" resultMap="BaseResultMap">
+        SELECT * FROM CONTENT   LIMIT #{startIndex},#{pageSize}
+    </select>
 
     <select id="findContentByUserId"  parameterType="java.lang.Long" resultMap="BaseResultMap">
         SELECT
         <include refid="BASE_ALL_COLUMNS_NO_CONTENT"/>
         FROM content  WHERE userId = #{userId}
+    </select>
+
+    <select id="findContentByUserIdCatalogId"  parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BASE_ID_TITLE"/>
+        FROM content  WHERE userId = #{userId} and catalogId = #{catalogId} order by createDate DESC
     </select>
 
 </mapper>

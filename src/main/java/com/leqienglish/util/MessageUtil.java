@@ -13,4 +13,8 @@ public class MessageUtil {
         message.setData(data);
         return message;
     }
+
+    public static <T> Message createSuccessMessage(T data){
+        return createMessage("1","ok",data);
+    }
 }

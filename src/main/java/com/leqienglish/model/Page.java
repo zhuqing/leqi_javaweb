@@ -7,6 +7,18 @@ public class Page {
     private Integer page;
     private Integer pageSize;
 
+    private Integer startIndex;
+
+    public Page(){
+
+    }
+
+    public Page(Integer page,Integer pageSize){
+        this.page = page;
+        this.pageSize = pageSize;
+        this.getStartIndex();
+    }
+
     public Integer getPage() {
         return page;
     }
@@ -24,5 +36,9 @@ public class Page {
 
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public void setStartIndex(Integer startIndex) {
+        this.startIndex = startIndex;
     }
 }

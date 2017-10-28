@@ -1,0 +1,12 @@
+Create database Book;
+
+CREATE TABLE `book`.`user` (
+  `id` BIGINT NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(32) NOT NULL,
+  `createDate` INT NOT NULL,
+  `updateDate` BIGINT NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC, `email` ASC, `updateDate` ASC, `createDate` ASC, `password` ASC, `name` ASC));
+

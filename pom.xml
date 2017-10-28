@@ -212,7 +212,7 @@
       <artifactId>LeQi</artifactId>
       <version>1.0.3-SNAPSHOT</version>
       <scope>system</scope>
-      <systemPath>${basedir}/libs/LeQi_Entity-1.0.3-SNAPSHOT.jar</systemPath>
+      <systemPath>${basedir}/lib/LeQi_Entity-1.0.4-SNAPSHOT.jar</systemPath>
     </dependency>
   </dependencies>
   <build>
